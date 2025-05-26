@@ -31,7 +31,7 @@ test.describe("User login to Demobank", () => {
     await page.getByTestId("login-input").fill("asdfasdf");
     await page.getByTestId("password-input").click();
     await page.getByTestId("password-input").fill("qweqweq");
-    await page.getByText("hasło", { exact: true }).click();
+    await page.getByTestId("password-input").blur();
     await page.getByTestId("error-login-password").click();
 
     await expect(page.getByTestId("error-login-password")).toHaveText(
