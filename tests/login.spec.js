@@ -24,4 +24,18 @@ test.describe("User login to Demobank", () => {
       "identyfikator ma min. 8 znaków"
     );
   });
+
+  test("Unsuccessful login with too short password", async ({ page }) => {
+    await page.goto("https://demo-bank.vercel.app/");
+    await page.getByTestId("login-input").click();
+    await page.getByTestId("login-input").fill("asdfasdf");
+    await page.getByTestId("password-input").click();
+    await page.getByTestId("password-input").fill("qweqweq");
+    await page.getByText("hasło", { exact: true }).click();
+    await page.getByTestId("error-login-password").click();
+
+    await expect(page.getByTestId("error-login-password")).toHaveText(
+      "hasło ma min. 8 znaków"
+    );
+  });
 });
