@@ -1,13 +1,21 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("User login to Demobank", () => {
-  test("Successful login with correct credentials", async ({ page }) => {
-    await page.goto("https://demo-bank.vercel.app/");
-    await page.getByTestId("login-input").fill("asdfasdf");
-    await page.getByTestId("password-input").fill("qweqweqw");
+  test.only("Successful login with correct credentials", async ({ page }) => {
+    // Arrange
+    const url = "https://demo-bank.vercel.app/";
+    const username = "asdfasdf";
+    const password = "qweqweqw";
+    const expectedUserName = "Jan Demobankowy";
+
+    // Act
+    await page.goto(url);
+    await page.getByTestId("login-input").fill(username);
+    await page.getByTestId("password-input").fill(password);
     await page.getByTestId("login-button").click();
 
-    await expect(page.getByTestId("user-name")).toHaveText("Jan Demobankowy");
+    // Assert
+    await expect(page.getByTestId("user-name")).toHaveText(expectedUserName);
   });
 
   test("Unsuccessful login with too short username", async ({ page }) => {
