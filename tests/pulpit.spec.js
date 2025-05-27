@@ -11,6 +11,7 @@ test.describe("Pulpit", () => {
     const amount = "123";
     const transferTitle = "pizza";
     const expectedReceiverName = "Chuck Demobankowy";
+    const expectedMessage = `Przelew wykonany! ${expectedReceiverName} - ${amount},00PLN - ${transferTitle}`;
 
     // Act
     await page.goto(url);
@@ -25,9 +26,7 @@ test.describe("Pulpit", () => {
     await page.getByTestId("close-button").click();
 
     // Assert
-    await expect(page.locator("#show_messages")).toHaveText(
-      `Przelew wykonany! ${expectedReceiverName} - ${amount},00PLN - ${transferTitle}`
-    );
+    await expect(page.locator("#show_messages")).toHaveText(expectedMessage);
   });
 
   test("Phone topup with correct data", async ({ page }) => {
@@ -38,6 +37,7 @@ test.describe("Pulpit", () => {
 
     const option = "502 xxx xxx";
     const amount = "123";
+    const expectedMessage = `Doładowanie wykonane! ${amount},00PLN na numer ${option}`;
 
     // Act
     await page.goto(url);
@@ -52,8 +52,6 @@ test.describe("Pulpit", () => {
     await page.getByTestId("close-button").click();
 
     // Assert
-    await expect(page.locator("#show_messages")).toHaveText(
-      `Doładowanie wykonane! ${amount},00PLN na numer ${option}`
-    );
+    await expect(page.locator("#show_messages")).toHaveText(expectedMessage);
   });
 });
