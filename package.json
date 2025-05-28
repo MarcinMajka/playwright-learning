@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "npx playwright test",
-    "test:headed": "npx playwright test --headed"
+    "test:headed": "npx playwright test --headed",
+    "test:pulpit:headed": "npm run test tests/pulpit.spec.js -- --headed"
   }
 }

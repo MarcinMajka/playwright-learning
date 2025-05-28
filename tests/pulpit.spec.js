@@ -18,6 +18,8 @@ test.describe("Pulpit", () => {
     const transferTitle = "pizza";
     const expectedReceiverName = "Chuck Demobankowy";
     const expectedMessage = `Przelew wykonany! ${expectedReceiverName} - ${amount},00PLN - ${transferTitle}`;
+    const initialBalance = await page.locator("#money_value").innerText();
+    const expectedBalance = Number(initialBalance) - Number(amount);
 
     // Act
     await page.locator("#widget_1_transfer_receiver").selectOption(option);
@@ -28,6 +30,7 @@ test.describe("Pulpit", () => {
 
     // Assert
     await expect(page.locator("#show_messages")).toHaveText(expectedMessage);
+    await expect(page.locator("#money_value")).toHaveText(`${expectedBalance}`);
   });
 
   test("Phone topup with correct data", async ({ page }) => {
