@@ -6,7 +6,7 @@ test.describe("Payments", () => {
     const username = "asdfasdf";
     const password = "qweqweqw";
 
-    await page.goto("https://demo-bank.vercel.app/");
+    await page.goto("/");
     const loginPage = new LoginPage(page);
     await loginPage.loginInput.fill(username);
     await loginPage.passwordInput.fill(password);
