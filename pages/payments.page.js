@@ -1,6 +1,12 @@
+import { SideMenuComponent } from "../components/side-menu.component";
+
 export class PaymentsPage {
   constructor(page) {
     this.page = page;
+  }
+
+  get sideMenu() {
+    return new SideMenuComponent(this.page);
   }
 
   get transferReceiver() {
