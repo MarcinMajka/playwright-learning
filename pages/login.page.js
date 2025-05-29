@@ -14,4 +14,8 @@ export class LoginPage {
   get loginButton() {
     return this.page.getByTestId("login-button");
   }
+
+  get loginError() {
+    return this.page.getByTestId("error-login-id");
+  }
 }

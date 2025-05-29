@@ -29,11 +29,12 @@ test.describe("User login to Demobank", () => {
     const errorMessage = "identyfikator ma min. 8 znaków";
 
     // Act
-    await page.getByTestId("login-input").fill(username);
-    await page.getByTestId("login-input").blur();
+    const loginPage = new LoginPage(page);
+    await loginPage.loginInput.fill(username);
+    await loginPage.loginInput.blur();
 
     // Assert
-    await expect(page.getByTestId("error-login-id")).toHaveText(errorMessage);
+    await expect(loginPage.loginError).toHaveText(errorMessage);
   });
 
   test("Unsuccessful login with too short password", async ({ page }) => {
