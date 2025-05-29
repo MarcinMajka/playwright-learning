@@ -1,0 +1,17 @@
+export class LoginPage {
+  constructor(page) {
+    this.page = page;
+  }
+
+  get loginInput() {
+    return this.page.getByTestId("login-input");
+  }
+
+  get passwordInput() {
+    return this.page.getByTestId("password-input");
+  }
+
+  get loginButton() {
+    return this.page.getByTestId("login-button");
+  }
+}
