@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { LoginPage } from "../pages/login.page";
 
 test.describe("Payments", () => {
   test.beforeEach(async ({ page }) => {
@@ -6,9 +7,10 @@ test.describe("Payments", () => {
     const password = "qweqweqw";
 
     await page.goto("https://demo-bank.vercel.app/");
-    await page.getByTestId("login-input").fill(username);
-    await page.getByTestId("password-input").fill(password);
-    await page.getByTestId("login-button").click();
+    const loginPage = new LoginPage(page);
+    await loginPage.loginInput.fill(username);
+    await loginPage.passwordInput.fill(password);
+    await loginPage.loginButton.click();
     await page.getByRole("link", { name: "płatności" }).click();
   });
 
