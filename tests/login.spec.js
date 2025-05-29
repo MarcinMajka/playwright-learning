@@ -20,7 +20,7 @@ test.describe("User login to Demobank", () => {
     await loginPage.loginButton.click();
 
     // Assert
-    await expect(page.getByTestId("user-name")).toHaveText(expectedUserName);
+    await expect(loginPage.userName).toHaveText(expectedUserName);
   });
 
   test("Unsuccessful login with too short username", async ({ page }) => {

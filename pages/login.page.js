@@ -22,4 +22,8 @@ export class LoginPage {
   get passwordError() {
     return this.page.getByTestId("error-login-password");
   }
+
+  get userName() {
+    return this.page.getByTestId("user-name");
+  }
 }
