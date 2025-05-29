@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { LoginPage } from "../pages/login.page";
-import { PulpitPage } from "../pages/pulpit.page";
 import { PaymentsPage } from "../pages/payments.page";
+import { SideMenuComponent } from "../components/side-menu.component";
 
 test.describe("Payments", () => {
   test.beforeEach(async ({ page }) => {
@@ -14,8 +14,8 @@ test.describe("Payments", () => {
     await loginPage.passwordInput.fill(password);
     await loginPage.loginButton.click();
 
-    const pulpitPage = new PulpitPage(page);
-    await pulpitPage.paymentsLink.click();
+    const sideMenu = new SideMenuComponent(page);
+    await sideMenu.paymentsLink.click();
   });
 
   test("Simple payment", async ({ page }) => {

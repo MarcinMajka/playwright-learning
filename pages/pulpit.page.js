@@ -3,10 +3,6 @@ export const PulpitPage = class {
     this.page = page;
   }
 
-  get paymentsLink() {
-    return this.page.locator("#payments_btn");
-  }
-
   get paymentReceiver() {
     return this.page.locator("#widget_1_transfer_receiver");
   }
