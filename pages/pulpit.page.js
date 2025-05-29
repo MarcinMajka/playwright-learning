@@ -1,4 +1,4 @@
-export const PulpitPage = class {
+export class PulpitPage {
   constructor(page) {
     this.page = page;
   }
@@ -54,4 +54,4 @@ export const PulpitPage = class {
   get executePhoneButton() {
     return this.page.locator("#execute_phone_btn");
   }
-};
+}

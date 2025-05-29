@@ -1,4 +1,4 @@
-export const PaymentsPage = class {
+export class PaymentsPage {
   constructor(page) {
     this.page = page;
   }
@@ -26,6 +26,6 @@ export const PaymentsPage = class {
   get messages() {
     return this.page.locator("#show_messages");
   }
-};
+}
 
 // await page.getByRole("button", { name: "wykonaj przelew" }).click();
