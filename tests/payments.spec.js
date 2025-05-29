@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { LoginPage } from "../pages/login.page";
+import { PulpitPage } from "../pages/pulpit.page";
 
 test.describe("Payments", () => {
   test.beforeEach(async ({ page }) => {
@@ -11,7 +12,9 @@ test.describe("Payments", () => {
     await loginPage.loginInput.fill(username);
     await loginPage.passwordInput.fill(password);
     await loginPage.loginButton.click();
-    await page.getByRole("link", { name: "płatności" }).click();
+
+    const pulpitPage = new PulpitPage(page);
+    await pulpitPage.paymentsLink.click();
   });
 
   test("Simple payment", async ({ page }) => {
