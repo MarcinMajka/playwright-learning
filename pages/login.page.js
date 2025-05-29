@@ -18,4 +18,8 @@ export class LoginPage {
   get loginError() {
     return this.page.getByTestId("error-login-id");
   }
+
+  get passwordError() {
+    return this.page.getByTestId("error-login-password");
+  }
 }
