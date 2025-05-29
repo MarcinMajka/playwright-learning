@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { LoginPage } from "../pages/login.page";
+import { PulpitPage } from "../pages/pulpit.page";
 
 test.describe("Pulpit", () => {
   test.beforeEach(async ({ page }) => {
@@ -24,15 +25,16 @@ test.describe("Pulpit", () => {
     const expectedBalance = Number(initialBalance) - Number(amount);
 
     // Act
-    await page.locator("#widget_1_transfer_receiver").selectOption(option);
-    await page.locator("#widget_1_transfer_amount").fill(amount);
-    await page.locator("#widget_1_transfer_title").fill(transferTitle);
-    await page.locator("#execute_btn").click();
-    await page.getByTestId("close-button").click();
+    const pulpitPage = new PulpitPage(page);
+    await pulpitPage.paymentReceiver.selectOption(option);
+    await pulpitPage.paymentAmount.fill(amount);
+    await pulpitPage.paymentTitle.fill(transferTitle);
+    await pulpitPage.executeButton.click();
+    await pulpitPage.closeButton.click();
 
     // Assert
-    await expect(page.locator("#show_messages")).toHaveText(expectedMessage);
-    await expect(page.locator("#money_value")).toHaveText(`${expectedBalance}`);
+    await expect(pulpitPage.messages).toHaveText(expectedMessage);
+    await expect(pulpitPage.moneyValue).toHaveText(`${expectedBalance}`);
   });
 
   test("Phone topup with correct data", async ({ page }) => {
@@ -42,11 +44,12 @@ test.describe("Pulpit", () => {
     const expectedMessage = `Doładowanie wykonane! ${amount},00PLN na numer ${option}`;
 
     // Act
-    await page.locator("#widget_1_topup_receiver").selectOption(option);
-    await page.locator("#widget_1_topup_amount").fill(amount);
-    await page.locator("#widget_1_topup_agreement").click();
-    await page.locator("#execute_phone_btn").click();
-    await page.getByTestId("close-button").click();
+    const pulpitPage = new PulpitPage(page);
+    await pulpitPage.phoneTopupReceiver.selectOption(option);
+    await pulpitPage.phoneTopupAmount.fill(amount);
+    await pulpitPage.topupAgreement.click();
+    await pulpitPage.executePhoneButton.click();
+    await pulpitPage.closeButton.click();
 
     // Assert
     await expect(page.locator("#show_messages")).toHaveText(expectedMessage);
