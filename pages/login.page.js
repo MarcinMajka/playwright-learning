@@ -5,10 +5,6 @@ export class LoginPage {
     this.page = page;
   }
 
-  get sideMenu() {
-    return new SideMenuComponent(this.page);
-  }
-
   get loginInput() {
     return this.page.getByTestId("login-input");
   }

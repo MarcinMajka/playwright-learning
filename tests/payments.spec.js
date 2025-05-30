@@ -3,6 +3,8 @@ import { LoginPage } from "../pages/login.page";
 import { PaymentsPage } from "../pages/payments.page";
 
 test.describe("Payments", () => {
+  let paymentsPage;
+
   test.beforeEach(async ({ page }) => {
     const username = "asdfasdf";
     const password = "qweqweqw";
@@ -13,7 +15,8 @@ test.describe("Payments", () => {
     await loginPage.passwordInput.fill(password);
     await loginPage.loginButton.click();
 
-    await loginPage.sideMenu.paymentsLink.click();
+    paymentsPage = new PaymentsPage(page);
+    await paymentsPage.sideMenu.paymentsLink.click();
   });
 
   test("Simple payment", async ({ page }) => {
@@ -24,7 +27,6 @@ test.describe("Payments", () => {
     const expectedMessage = `Przelew wykonany! ${amount},00PLN dla ${transferReceiver}`;
 
     // Act
-    const paymentsPage = new PaymentsPage(page);
     await paymentsPage.transferReceiver.fill(transferReceiver);
     await paymentsPage.transferId.fill(transferId);
     await paymentsPage.amount.fill(amount);
