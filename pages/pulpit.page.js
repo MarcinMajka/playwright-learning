@@ -60,4 +60,20 @@ export class PulpitPage {
   get executePhoneButton() {
     return this.page.locator("#execute_phone_btn");
   }
+
+  async makePayment(receiver, amount, title) {
+    await this.paymentReceiver.selectOption(receiver);
+    await this.paymentAmount.fill(amount);
+    await this.paymentTitle.fill(title);
+    await this.executeButton.click();
+    await this.closeButton.click();
+  }
+
+  async phoneTopup(receiver, amount) {
+    await this.phoneTopupReceiver.selectOption(receiver);
+    await this.phoneTopupAmount.fill(amount);
+    await this.topupAgreement.click();
+    await this.executePhoneButton.click();
+    await this.closeButton.click();
+  }
 }

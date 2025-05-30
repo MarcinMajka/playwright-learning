@@ -27,11 +27,7 @@ test.describe("Pulpit", () => {
     const expectedBalance = Number(initialBalance) - Number(amount);
 
     // Act
-    await pulpitPage.paymentReceiver.selectOption(option);
-    await pulpitPage.paymentAmount.fill(amount);
-    await pulpitPage.paymentTitle.fill(transferTitle);
-    await pulpitPage.executeButton.click();
-    await pulpitPage.closeButton.click();
+    await pulpitPage.makePayment(option, amount, transferTitle);
 
     // Assert
     await expect(pulpitPage.messages).toHaveText(expectedMessage);
@@ -45,11 +41,7 @@ test.describe("Pulpit", () => {
     const expectedMessage = `Doładowanie wykonane! ${amount},00PLN na numer ${option}`;
 
     // Act
-    await pulpitPage.phoneTopupReceiver.selectOption(option);
-    await pulpitPage.phoneTopupAmount.fill(amount);
-    await pulpitPage.topupAgreement.click();
-    await pulpitPage.executePhoneButton.click();
-    await pulpitPage.closeButton.click();
+    await pulpitPage.phoneTopup(option, amount);
 
     // Assert
     await expect(pulpitPage.messages).toHaveText(expectedMessage);
