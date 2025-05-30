@@ -32,6 +32,13 @@ export class PaymentsPage {
   get messages() {
     return this.page.locator("#show_messages");
   }
-}
 
-// await page.getByRole("button", { name: "wykonaj przelew" }).click();
+  async makeTransfer(receiver, transferAccount, amount) {
+    await this.transferReceiver.fill(receiver);
+    await this.transferId.fill(transferAccount);
+    await this.amount.fill(amount);
+
+    await this.executeButton.click();
+    await this.closeButton.click();
+  }
+}
