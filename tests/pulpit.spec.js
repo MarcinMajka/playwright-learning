@@ -16,34 +16,42 @@ test.describe("Pulpit", () => {
     pulpitPage = new PulpitPage(page);
   });
 
-  test("Quick payment with correct data", async ({ page }) => {
-    // Arrange
-    const option = "2";
-    const amount = "123";
-    const transferTitle = "pizza";
-    const expectedReceiverName = "Chuck Demobankowy";
-    const expectedMessage = `Przelew wykonany! ${expectedReceiverName} - ${amount},00PLN - ${transferTitle}`;
-    const initialBalance = await page.locator("#money_value").innerText();
-    const expectedBalance = Number(initialBalance) - Number(amount);
+  test(
+    "Quick payment with correct data",
+    { tag: ["@pulpit", "@integration"] },
+    async ({ page }) => {
+      // Arrange
+      const option = "2";
+      const amount = "123";
+      const transferTitle = "pizza";
+      const expectedReceiverName = "Chuck Demobankowy";
+      const expectedMessage = `Przelew wykonany! ${expectedReceiverName} - ${amount},00PLN - ${transferTitle}`;
+      const initialBalance = await page.locator("#money_value").innerText();
+      const expectedBalance = Number(initialBalance) - Number(amount);
 
-    // Act
-    await pulpitPage.makePayment(option, amount, transferTitle);
+      // Act
+      await pulpitPage.makePayment(option, amount, transferTitle);
 
-    // Assert
-    await expect(pulpitPage.messages).toHaveText(expectedMessage);
-    await expect(pulpitPage.moneyValue).toHaveText(`${expectedBalance}`);
-  });
+      // Assert
+      await expect(pulpitPage.messages).toHaveText(expectedMessage);
+      await expect(pulpitPage.moneyValue).toHaveText(`${expectedBalance}`);
+    }
+  );
 
-  test("Phone topup with correct data", async ({ page }) => {
-    // Arrange
-    const option = "502 xxx xxx";
-    const amount = "123";
-    const expectedMessage = `Doładowanie wykonane! ${amount},00PLN na numer ${option}`;
+  test(
+    "Phone topup with correct data",
+    { tag: ["@pulpit", "@integration"] },
+    async ({ page }) => {
+      // Arrange
+      const option = "502 xxx xxx";
+      const amount = "123";
+      const expectedMessage = `Doładowanie wykonane! ${amount},00PLN na numer ${option}`;
 
-    // Act
-    await pulpitPage.phoneTopup(option, amount);
+      // Act
+      await pulpitPage.phoneTopup(option, amount);
 
-    // Assert
-    await expect(pulpitPage.messages).toHaveText(expectedMessage);
-  });
+      // Assert
+      await expect(pulpitPage.messages).toHaveText(expectedMessage);
+    }
+  );
 });
