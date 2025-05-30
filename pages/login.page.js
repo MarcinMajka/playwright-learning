@@ -28,4 +28,10 @@ export class LoginPage {
   get userName() {
     return this.page.getByTestId("user-name");
   }
+
+  async login(username, password) {
+    await this.loginInput.fill(username);
+    await this.passwordInput.fill(password);
+    await this.loginButton.click();
+  }
 }

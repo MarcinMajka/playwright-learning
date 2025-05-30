@@ -11,9 +11,7 @@ test.describe("Payments", () => {
 
     await page.goto("/");
     const loginPage = new LoginPage(page);
-    await loginPage.loginInput.fill(username);
-    await loginPage.passwordInput.fill(password);
-    await loginPage.loginButton.click();
+    await loginPage.login(username, password);
 
     paymentsPage = new PaymentsPage(page);
     await paymentsPage.sideMenu.paymentsLink.click();
