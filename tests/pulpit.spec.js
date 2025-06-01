@@ -3,6 +3,10 @@ import { LoginPage } from "../pages/login.page";
 import { PulpitPage } from "../pages/pulpit.page";
 
 test.describe("Pulpit", () => {
+  // Makes failed tests retry X times before marking them as failed
+  // If at least one try works, the test passes, but is marked as flaky
+  test.describe.configure({ retries: 3 });
+
   let pulpitPage;
 
   test.beforeEach(async ({ page }) => {
