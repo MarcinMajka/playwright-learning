@@ -17,6 +17,8 @@ test.describe("Pulpit", () => {
     const loginPage = new LoginPage(page);
     await loginPage.login(username, password);
 
+    await page.waitForLoadState("domcontentloaded");
+
     pulpitPage = new PulpitPage(page);
   });
 
